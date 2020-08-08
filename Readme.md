@@ -25,8 +25,23 @@ _This is a small project using local storage in which:_
 
 *Courses will be stored in local storage.
 
-
 *The cart will load the stored information from the local storage in case the user visits the site again.
 
 *Removing a course from the cart also removes it from local storage.
+
+
+
+=====================================================
+
+## Email sending simulator
+
+*This project use Materialize.
+
+*If the fields are empty, the email should not be sent and the fields should be shown in red.
+
+*There must be a button to delete all the content of the form.
+
+*Pressing the button to send a load spinner should show.
+
+*After the spinner a chart of sent should be displayed.
 
