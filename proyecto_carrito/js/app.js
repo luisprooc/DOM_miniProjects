@@ -69,6 +69,7 @@ function insertarCarrito(infoCurso){
         </td>
     `;
     listaCursos.appendChild(row);
+    guardarCursoLocalStorage(infoCurso);
 }
 
 // Eliminar curso del carrito en el Dom
@@ -94,4 +95,35 @@ function vaciarCarrito(){
 
     // Para que no haga un salto en el sitio
     return False
+}
+
+
+// Obtener los cursos del LS
+function obtenerCursosLocalStorage(){
+    let cursosLS;
+
+    // Comprobamos si hay cursos en local storage
+
+    if(localStorage.getItem("cursos") === null){
+        cursosLS = [];
+    }
+
+    else{
+        // Pasar los cursos en forma de arreglo
+        cursosLS = JSON.parse(localStorage.getItem("cursos"));
+    }
+
+    return cursosLS;
+}
+
+// Almacena cursos del carrito al local storage
+
+function guardarCursoLocalStorage(curso){
+    let cursos;
+    cursos = obtenerCursosLocalStorage();
+    
+    // El curso seleccionado se agrega al arreglo
+    cursos.push(curso);
+
+    localStorage.setItem("cursos",JSON.stringify(cursos));
 }
