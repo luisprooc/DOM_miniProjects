@@ -45,3 +45,17 @@ _This is a small project using local storage in which:_
 
 *After the spinner a chart of sent should be displayed.
 
+
+
+=====================================================
+
+## Quote your car insurance
+
+*There are 3 models, each one us will give different prices.
+
+*Each year before at actual year of car its price must be less on 3%.
+
+*The car insurance complete or basic have a different prices.
+
+*This project must be made with Prototypes (ES5) and migrate it to Classes (ES6).
+
