@@ -82,6 +82,39 @@ Interfaz.prototype.mostrarError = function(mensaje,tipo){
 }
 
 
+Interfaz.prototype.mostrarResultado = function(seguro,monto){
+    const resultado = document.getElementById("resultado");
+    let marca;
+
+    switch(seguro.marca){
+        case "1":
+            marca = "Americano";
+            break;
+
+        case "2":
+            marca = "Asiatico";
+            break;
+        
+        default:
+            marca = "Europeo";
+            break;
+
+    }
+
+    const div = document.createElement("div");
+
+    div.innerHTML = `
+        <p> <strong>Tu resumen: </strong> </p>
+        <p>Marca: ${marca} </p>
+        <p>Año: ${seguro.anio}</p>
+        <p>Tipo: ${seguro.tipo}</p>
+        <p> <strong> Total: ${monto} </strong> </p>
+    `;
+
+    resultado.appendChild(div);
+
+}
+
 
 // Eventos
 
@@ -116,6 +149,9 @@ formulario.addEventListener("submit",function(e){
 
         const monto = seguro.cotizarSeguro();
         
+        // Mostrar el resultado
+
+        interfaz.mostrarResultado(seguro,monto);
     }
 });
 
