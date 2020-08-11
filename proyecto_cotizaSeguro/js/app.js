@@ -53,7 +53,7 @@ Seguro.prototype.cotizarSeguro = function(){
         cantidad *= 1.50;
     }
 
-    return cantidad;
+    return parseInt(cantidad);
 }
 
 
@@ -62,15 +62,15 @@ Seguro.prototype.cotizarSeguro = function(){
 function Interfaz(){}
 
 
-Interfaz.prototype.mostrarError = function(mensaje,tipo){
+Interfaz.prototype.mostrarMensaje = function(mensaje,tipo){
     const div = document.createElement("div");
 
     if(tipo === "error"){
-        div.classList.add("mensaje","error");
+        div.classList.add("mensaje",tipo);
     }
 
     else{
-        div.classList.add("mensaje","correcto");
+        div.classList.add("mensaje",tipo);
     }
 
     div.innerHTML = `${mensaje}`;
@@ -104,14 +104,23 @@ Interfaz.prototype.mostrarResultado = function(seguro,monto){
     const div = document.createElement("div");
 
     div.innerHTML = `
-        <p> <strong>Tu resumen: </strong> </p>
+        <p class = "header"> <strong>Tu resumen: </strong> </p>
         <p>Marca: ${marca} </p>
         <p>Año: ${seguro.anio}</p>
         <p>Tipo: ${seguro.tipo}</p>
         <p> <strong> Total: ${monto} </strong> </p>
     `;
 
+    
+
+    const spinner = document.querySelector("#cargando img");
+    spinner.style.display = "block";
+
+    setTimeout(function(){
+        spinner.style.display = "none";
+
     resultado.appendChild(div);
+    },3000);
 
 }
 
@@ -138,10 +147,21 @@ formulario.addEventListener("submit",function(e){
     // Revisamos si los campos estan vacios
 
     if(marcaSeleccionada === ""){
-        interfaz.mostrarError("Faltan datos, revisa el formulario","error");
+        interfaz.mostrarMensaje("Faltan datos, revisa el formulario","error");
     }
 
     else{
+
+        interfaz.mostrarMensaje("cotizando...","correcto");
+
+        // Limpiar resultados
+
+        const resultados = document.querySelector("#resultado div");
+
+        if(resultados != null){
+            resultados.remove();
+        }
+
         // Crear el seguro
         const seguro = new Seguro(marcaSeleccionada,anioSeleccionado,tipo);
 
