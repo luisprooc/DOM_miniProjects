@@ -13,9 +13,30 @@ function Seguro(marca,anio,tipo){
 function Interfaz(){}
 
 
+Interfaz.prototype.mostrarError = function(mensaje,tipo){
+    const div = document.createElement("div");
+
+    if(tipo === "error"){
+        div.classList.add("mensaje","error");
+    }
+
+    else{
+        div.classList.add("mensaje","correcto");
+    }
+
+    div.innerHTML = `${mensaje}`;
+    formulario.insertBefore(div,document.querySelector(".form-group"));
+
+    setTimeout(function(){
+        document.querySelector(".mensaje").remove();
+    },3000);
+}
+
+
+
 // Eventos
 
-const formulario =document.getElementById("cotizar-seguro");
+const formulario = document.getElementById("cotizar-seguro");
 
 formulario.addEventListener("submit",function(e){
     e.preventDefault();
@@ -35,11 +56,11 @@ formulario.addEventListener("submit",function(e){
     // Revisamos si los campos estan vacios
 
     if(marcaSeleccionada === ""){
-        console.warn("faltan datos");
+        interfaz.mostrarError("Faltan datos, revisa el formulario","error");
     }
 
     else{
-        console.log("XD");
+        console.log("Correcto","correcto");
     }
 });
 
