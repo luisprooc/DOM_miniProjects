@@ -26,7 +26,19 @@ class Presupuesto{
     }
 }
 
+// Maneja todo lo relacionado con HTML
+class Interfaz{
+    insertarPresupuesto(cantidad){
+        const presupuestoSpan = document.querySelector("span#total");
+        const restanteSpan = document.querySelector("span#restante");
 
+        // Insertar en el html
+
+        presupuestoSpan.innerHTML = `${cantidad}`;
+        restanteSpan.innerHTML = `${cantidad}`;
+    }
+
+}
 
 
 
@@ -41,12 +53,19 @@ class Presupuesto{
 document.addEventListener("DOMContentLoaded",function(){
 
     if(isNaN(presupuestoUsuario)){
+        // Si no se introduce un numero se recarga la ventana
+        alert("Debes introducir un numero");
         window.location.reload();
     }
 
     else{
+        // Instanciar presupuesto
+
         cantidadPresupuesto = new Presupuesto(presupuestoUsuario);
-        console.log(cantidadPresupuesto);
+        
+        const ui = new Interfaz();
+
+        ui.insertarPresupuesto(cantidadPresupuesto.Presupuesto);
     }
 });
 
