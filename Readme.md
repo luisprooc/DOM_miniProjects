@@ -59,3 +59,17 @@ _This is a small project using local storage in which:_
 
 *This project must be made with Prototypes (ES5) and migrate it to Classes (ES6).
 
+
+
+=====================================================
+
+## Weekly expense
+
+*Add a weekly expense.
+
+*Create a list of spends to go reducing the quantify of free budget.
+
+*Once spent the 50% shown the remaining in yellow color.
+
+*Once spent the 75% shown the remaining in red color.
+
