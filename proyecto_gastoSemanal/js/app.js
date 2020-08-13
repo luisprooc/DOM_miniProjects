@@ -17,12 +17,16 @@ let cantidadPresupuesto;
 class Presupuesto{
 
     constructor(presupuesto) {
-        this.Presupuesto = presupuesto;
+        this.presupuesto = presupuesto;
         this.restante = presupuesto;
     }
 
     presupuestoRestante(cantidad = 0){
-        return this.restante -= Number(cantidad);
+        if(this.restante <= cantidad){
+            alert("Ya gastaste el presupuesto de la semana , Todo lo agregado a continuacion se descontara de la proxima semana");
+            
+        }
+        return this.restante -= cantidad;
     }
 }
 
@@ -90,6 +94,31 @@ class Interfaz{
         const prespuestoRestanteUsuario = cantidadPresupuesto.presupuestoRestante(cantidad);
 
         restante.innerHTML = `${prespuestoRestanteUsuario}`;
+        this.comprobarPresupuesto();
+    }
+
+    // Cambiar de color el presupuesto restante
+
+    comprobarPresupuesto(){
+        const presupuestoTotal = cantidadPresupuesto.presupuesto;
+        const presupuestoRestante = cantidadPresupuesto.restante;
+
+        
+
+        // obtener 25%
+
+        if( (presupuestoTotal / 4) > presupuestoRestante){
+            const restante = document.querySelector(".restante");
+            restante.classList.remove("alert-sucess","alert-warning");
+            restante.classList.add("alert-danger");
+        }
+
+        // obtener 50%
+        else if( (presupuestoTotal / 2) > presupuestoRestante){
+            const restante = document.querySelector(".restante");
+            restante.classList.remove("alert-sucess","alert-danger");
+            restante.classList.add("alert-warning");
+        }
     }
 }
 
@@ -118,7 +147,7 @@ document.addEventListener("DOMContentLoaded",function(){
         
         const ui = new Interfaz();
 
-        ui.insertarPresupuesto(cantidadPresupuesto.Presupuesto);
+        ui.insertarPresupuesto(cantidadPresupuesto.presupuesto);
     }
 });
 
@@ -129,21 +158,22 @@ formulario.addEventListener("submit",function(e){
 
     // obtener valores del campo
     const nombreGasto = document.querySelector("#gasto").value;
-    const cantidadGasto = document.querySelector("#cantidad").value;
+    const cantidadGasto = parseInt(document.querySelector("#cantidad").value);
 
     // instanciar interfaz
 
     ui = new Interfaz();
 
-    if(nombreGasto === "" || cantidadGasto === "" ){
+    if(nombreGasto === "" || cantidadGasto === "" || isNaN(cantidadGasto)){
 
-        ui.imprimirMensaje("Faltan datos","error");
+        ui.imprimirMensaje("Ocurrio un error, llena los campos correctamente","error");
     }
 
     else{
         ui.imprimirMensaje("Correcto","correto");
         ui.agregarGastoListado(nombreGasto,cantidadGasto);
         ui.presupuestoRestante(cantidadGasto);
+        
     }
 });
 
