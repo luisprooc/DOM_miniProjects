@@ -21,8 +21,8 @@ class Presupuesto{
         this.restante = presupuesto;
     }
 
-    presupuestoRestante(cantidad){
-        return this.restante -= cantidad;
+    presupuestoRestante(cantidad = 0){
+        return this.restante -= Number(cantidad);
     }
 }
 
@@ -81,6 +81,16 @@ class Interfaz{
         li.className = "List-group-item d-flex justify-content-between align-item-center";
         gastosListado.appendChild(li);
     }
+
+    // Comprueba el resultado retante
+
+    presupuestoRestante(cantidad){
+        const restante = document.querySelector("span#restante");
+
+        const prespuestoRestanteUsuario = cantidadPresupuesto.presupuestoRestante(cantidad);
+
+        restante.innerHTML = `${prespuestoRestanteUsuario}`;
+    }
 }
 
 
@@ -133,6 +143,7 @@ formulario.addEventListener("submit",function(e){
     else{
         ui.imprimirMensaje("Correcto","correto");
         ui.agregarGastoListado(nombreGasto,cantidadGasto);
+        ui.presupuestoRestante(cantidadGasto);
     }
 });
 
