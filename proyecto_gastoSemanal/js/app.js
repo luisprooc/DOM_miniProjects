@@ -47,7 +47,7 @@ class Interfaz{
         }
 
         else{
-            divMensaje.classList.add("alert-succes");
+            divMensaje.classList.add("alert-success");
         }
 
         // Agregar texto
@@ -59,11 +59,28 @@ class Interfaz{
         // Eliminar luego de 3 segundos
 
         setTimeout(function(){
-            document.querySelector(".primario").removeChild(firstChild);
+            document.querySelector(".primario .alert").remove();
             formulario.reset();
         },3000);
     }
 
+    // Inserta los datos a la lista
+
+    agregarGastoListado(nombre,cantidad){
+        const gastosListado = document.querySelector("#gastos ul");
+
+        // crear li
+        const li = document.createElement("li");
+
+        li.innerHTML = `
+            ${nombre}
+            
+            <span class = "badge badge-primary badge-pill"> $ ${cantidad} </span>
+        `;
+
+        li.className = "List-group-item d-flex justify-content-between align-item-center";
+        gastosListado.appendChild(li);
+    }
 }
 
 
@@ -114,7 +131,8 @@ formulario.addEventListener("submit",function(e){
     }
 
     else{
-        console.log("Sucess");
+        ui.imprimirMensaje("Correcto","correto");
+        ui.agregarGastoListado(nombreGasto,cantidadGasto);
     }
 });
 
