@@ -1,6 +1,6 @@
 document.querySelector("#generar-nombre").addEventListener("submit",cargarNombres);
 
-
+let url;
 // LLamada a AJAX
 
 function cargarNombres(e){
@@ -33,5 +33,34 @@ function cargarNombres(e){
     // agregar cantidad de nombres
     url+= `amount=${cantidad}&`;
     
-
+    // cargar datos a AJAX
+    cargarAJAX(url);
 }
+
+function cargarAJAX(url){
+    const xhr = new XMLHttpRequest();
+
+    xhr.open("GET",url,true);
+
+    xhr.onreadystatechange = function(){
+        if(this.readyState === 4 && this.status ===200){
+
+            const nombres = JSON.parse(this.responseText);
+
+            let templateHtml = "<h2> Nombres generados <h2>";
+
+            templateHtml += "<ul class = 'lista'>";
+
+            nombres.forEach(function(nombre){
+                templateHtml += `<li> ${nombre.name}`;
+            })
+
+            templateHtml += "</ul>";
+
+            document.querySelector("#resultado").innerHTML = templateHtml;
+        }
+    }
+
+    xhr.send();
+}
+
