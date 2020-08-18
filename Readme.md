@@ -73,3 +73,17 @@ _This is a small project using local storage in which:_
 
 *Once spent the 75% shown the remaining in red color.
 
+
+
+=====================================================
+
+## Name generator
+
+*Consume the data from a REST API.
+
+*Send parameters to the REST API to filter country, gender and number of names.
+
+*Print the rsults from the REST API with FETCH API, AJAX and ASYNC/AWAIT.
+
+*It must be realized with Classes.
+
