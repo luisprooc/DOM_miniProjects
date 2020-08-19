@@ -33,34 +33,39 @@ function cargarNombres(e){
     // agregar cantidad de nombres
     url+= `amount=${cantidad}&`;
     
-    // cargar datos a AJAX
-    cargarAJAX(url);
+    // cargar datos a Fetch
+    cargarFeth(url);
 }
 
-function cargarAJAX(url){
-    const xhr = new XMLHttpRequest();
+function cargarFeth(url){
+    // Abrir fetch
+    fetch(url)
+        // Leer datos
+        .then(function(res){
+            return res.json();
+        })
 
-    xhr.open("GET",url,true);
+        // Imprimir datos
+        .then(function(nombres){
+            let html = "<h2> Nombres generados";
 
-    xhr.onreadystatechange = function(){
-        if(this.readyState === 4 && this.status ===200){
+            html += "<ul>";
 
-            const nombres = JSON.parse(this.responseText);
+            // Recorrer nombres
+            nombres.forEach(nombre => {
+                html += `<li> ${nombre.name} </li>`;
+            });
 
-            let templateHtml = "<h2> Nombres generados <h2>";
+            html += "</ul>";
 
-            templateHtml += "<ul class = 'lista'>";
+            document.getElementById("resultado").innerHTML = html;
+        })
 
-            nombres.forEach(function(nombre){
-                templateHtml += `<li> ${nombre.name}`;
-            })
+        .catch(function(error){
+            document.getElementById("resultado").innerHTML = ` Actualmente no es posible
+            generar nombres desde esta API: <b>${error}</b>
+            `;
+        })
 
-            templateHtml += "</ul>";
-
-            document.querySelector("#resultado").innerHTML = templateHtml;
-        }
-    }
-
-    xhr.send();
 }
 
