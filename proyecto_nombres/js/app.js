@@ -1,9 +1,11 @@
-document.querySelector("#generar-nombre").addEventListener("submit",cargarNombres);
+//
+
+eventos = () => document.querySelector("#generar-nombre").addEventListener("submit",cargarNombres);
 
 let url;
 // LLamada a AJAX
 
-function cargarNombres(e){
+const cargarNombres = (e) => {
     e.preventDefault();
 
     // Variables
@@ -37,16 +39,14 @@ function cargarNombres(e){
     cargarFeth(url);
 }
 
-function cargarFeth(url){
+const cargarFeth = (url) => {
     // Abrir fetch
     fetch(url)
         // Leer datos
-        .then(function(res){
-            return res.json();
-        })
+        .then(res => res.json())
 
         // Imprimir datos
-        .then(function(nombres){
+        .then(nombres => {
             let html = "<h2> Nombres generados";
 
             html += "<ul>";
@@ -61,7 +61,7 @@ function cargarFeth(url){
             document.getElementById("resultado").innerHTML = html;
         })
 
-        .catch(function(error){
+        .catch(error => {
             document.getElementById("resultado").innerHTML = ` Actualmente no es posible
             generar nombres desde esta API: <b>${error}</b>
             `;
@@ -69,3 +69,4 @@ function cargarFeth(url){
 
 }
 
+eventos();
