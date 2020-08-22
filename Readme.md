@@ -87,3 +87,17 @@ _This is a small project using local storage in which:_
 
 *It must be realized with Classes.
 
+
+
+=====================================================
+
+## Quote cryptocurrencies
+
+*Consume the data from a REST API.
+
+*Convert 4 coins (Dolars, Euros, Dominican pesos and Mexican pesos).
+
+*It will be made with Classes and Async / Await + Fetch API.
+
+*Add a graphic that simulate a calculate.
+
