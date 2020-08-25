@@ -72,32 +72,3 @@ _This is a small project using local storage in which:_
 *Once spent the 50% shown the remaining in yellow color.
 
 *Once spent the 75% shown the remaining in red color.
-
-
-
-=====================================================
-
-## Name generator
-
-*Consume the data from a REST API.
-
-*Send parameters to the REST API to filter country, gender and number of names.
-
-*Print the rsults from the REST API with FETCH API, AJAX and ASYNC/AWAIT.
-
-*It must be realized with Classes.
-
-
-
-=====================================================
-
-## Quote cryptocurrencies
-
-*Consume the data from a REST API.
-
-*Convert 4 coins (Dolars, Euros, Dominican pesos and Mexican pesos).
-
-*It will be made with Classes and Async / Await + Fetch API.
-
-*Add a graphic that simulate a calculate.
-
