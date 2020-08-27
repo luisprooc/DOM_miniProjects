@@ -72,3 +72,17 @@ _This is a small project using local storage in which:_
 *Once spent the 50% shown the remaining in yellow color.
 
 *Once spent the 75% shown the remaining in red color.
+
+
+
+=====================================================
+
+## Car seeker
+
+*Array methods will be used in this project.
+
+*The cars will be stored in list of objets.
+
+*Whenever the DOM has been charged, will shown all cars.
+
+*You can filter the cars for yours preferences.
