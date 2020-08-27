@@ -48,6 +48,7 @@ marca.addEventListener("change", (e) => {
 year.addEventListener("change", (e) => {
     datosBusqueda.año = e.target.value;
     
+    filtrarAuto();
 });
 
 minimo.addEventListener("change", (e) => {
@@ -113,7 +114,9 @@ function llenarYears(){
 
 function filtrarAuto(){
     // funcion de alto nivel
-    const resultado = autos.filter(filtrarMarca);
+    const resultado = autos.filter( filtrarMarca ).filter( filtrarYear )
+
+    console.log(resultado);
 }
 
 // Aqui se le pasa el parametro para iterar los autos
@@ -124,6 +127,14 @@ function filtrarMarca(auto){
     }
 
     // De lo contrario muestra el auto completo
+    return auto;
+}
+
+function filtrarYear(auto){
+    if(datosBusqueda){
+        return auto.year === parseInt(datosBusqueda.año);
+    }
+
     return auto;
 }
 
