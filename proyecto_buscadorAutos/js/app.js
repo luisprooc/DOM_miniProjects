@@ -2,11 +2,29 @@
 
 const resultado = document.getElementById("resultado");
 
+const marca = document.getElementById("marca");
 const year = document.getElementById("year");
+const minimo = document.getElementById("minimo");
+const maximo = document.getElementById("maximo");
+const puertas = document.getElementById("puertas");
+const transmision = document.getElementById("transmision");
+const color = document.getElementById("color");
 
 // obtener años
 const max = new Date().getFullYear(); 
 const min = max - 5;
+
+// Generar datos de busqueda
+
+const datosBusqueda = {
+    marca: "",
+    año: "",
+    min: "",
+    max: "",
+    puertas: "",
+    transmision: "",
+    color: ""
+}
 
 
 // eventos
@@ -20,7 +38,40 @@ document.addEventListener("DOMContentLoaded", ()=>{
     llenarYears();
 });
 
+// obtener valores de los select
+marca.addEventListener("change", (e) => {
+    datosBusqueda.marca = e.target.value;
+    
+});
 
+year.addEventListener("change", (e) => {
+    datosBusqueda.año = e.target.value;
+    
+});
+
+minimo.addEventListener("change", (e) => {
+    datosBusqueda.min = e.target.value;
+    
+});
+
+maximo.addEventListener("change", (e) => {
+    datosBusqueda.max = e.target.value;
+    
+});
+
+puertas.addEventListener("change", (e) => {
+    datosBusqueda.puertas = e.target.value;
+    
+});
+
+transmision.addEventListener("change", (e) => {
+    datosBusqueda.transmision = e.target.value;
+    
+});
+
+color.addEventListener("change", (e) => {
+    datosBusqueda.color = e.target.value;
+});
 
 
 // funciones
