@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 marca.addEventListener("change", (e) => {
     datosBusqueda.marca = e.target.value;
     
+    filtrarAuto();
 });
 
 year.addEventListener("change", (e) => {
@@ -106,3 +107,23 @@ function llenarYears(){
         year.appendChild(opcion);
     }
 }
+
+
+// Filtrar en base a la marca
+
+function filtrarAuto(){
+    // funcion de alto nivel
+    const resultado = autos.filter(filtrarMarca);
+}
+
+// Aqui se le pasa el parametro para iterar los autos
+function filtrarMarca(auto){
+    // Si hay un valor en marca filtra
+    if(datosBusqueda.marca){
+        return auto.marca === datosBusqueda.marca;
+    }
+
+    // De lo contrario muestra el auto completo
+    return auto;
+}
+
