@@ -31,7 +31,7 @@ const datosBusqueda = {
 
 document.addEventListener("DOMContentLoaded", ()=>{
     // muestra los autos al cargar
-    mostrarAutos();
+    mostrarAutos(autos);
 
     // llenar años del select
 
@@ -78,20 +78,30 @@ color.addEventListener("change", (e) => {
 
 // funciones
 
-function mostrarAutos(){
+function mostrarAutos(autos){
+    limpiarHtml();
     autos.forEach(auto => {
         
         // destructuring
         const {marca, modelo, year, puertas, transmision, precio, color} = auto;
         const html = document.createElement("p");
-
+        
         html.textContent = `
-            ${marca}-${modelo}-${year}-${puertas}-${transmision}-${precio}-${color}
+        ${marca}-${modelo}-${year}-${puertas}-${transmision}-${precio}-${color}
         `;
         resultado.appendChild(html);
     });
 
 }
+
+
+// limpiar HTML
+function limpiarHtml(){
+    while(resultado.firstChild){
+        resultado.removeChild(resultado.firstChild);
+    }
+}
+
 
 
 function llenarYears(){
@@ -114,9 +124,9 @@ function llenarYears(){
 
 function filtrarAuto(){
     // funcion de alto nivel
-    const resultado = autos.filter( filtrarMarca ).filter( filtrarYear )
+    const autosFiltrados = autos.filter( filtrarMarca ).filter(filtrarYear);
 
-    console.log(resultado);
+    mostrarAutos(autosFiltrados);
 }
 
 // Aqui se le pasa el parametro para iterar los autos
