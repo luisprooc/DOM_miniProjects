@@ -89,18 +89,28 @@ color.addEventListener("change", (e) => {
 
 function mostrarAutos(autos){
     limpiarHtml();
-    autos.forEach(auto => {
-        
-        // destructuring
-        const {marca, modelo, year, puertas, transmision, precio, color} = auto;
-        const html = document.createElement("p");
-        
-        html.textContent = `
-        ${marca}-${modelo}-${year}-${puertas}-${transmision}-${precio}-${color}
-        `;
-        resultado.appendChild(html);
-    });
+    if(autos.length > 0){
+        autos.forEach(auto => {
+            
+            // destructuring
+            const {marca, modelo, year, puertas, transmision, precio, color} = auto;
+            const html = document.createElement("p");
+            
+            html.textContent = `
+            ${marca}-${modelo}-${year}-${puertas}-${transmision}-${precio}-${color}
+            `;
+            resultado.appendChild(html);
+        });
+    }
+    else{
+        const html = document.createElement("h1");
 
+        html.innerText = "No hay autos en stock";
+        
+        html.style.color = "red";
+        html.style.textDecoration = "underline";
+        resultado.appendChild(html);
+    }
 }
 
 
