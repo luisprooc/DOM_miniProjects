@@ -86,3 +86,17 @@ _This is a small project using local storage in which:_
 *Whenever the DOM has been charged, will shown all cars.
 
 *You can filter the cars for yours preferences.
+
+
+
+=====================================================
+
+## Cites administrator
+
+*You can add a cite with data of: propietary, date, hour, sintoms, telephone and patient.
+
+*You can edit and delete the cites.
+
+*The cites will be stored on IndexedDB.
+
+*This project will be splited with modules.
