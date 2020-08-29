@@ -39,7 +39,6 @@ class Citas{
 
     agregarCita(cita){
         this.citas = [...this.citas,cita];
-        console.log(this.citas);
     }
 }
 
@@ -71,8 +70,73 @@ class Ui{
 
         setTimeout(() =>{
             divMensaje.remove();
-        },3000)
+        },3000);
         
+    }
+
+    // Destructuring en el parametro
+    imprimirCitas({citas}){
+        this.limpiarHtml();
+        citas.forEach(cita =>{
+            const {mascota,propietario,telefono,fecha,hora,sintomas,id} = cita;
+
+            const divCita = document.createElement("div");
+            divCita.classList.add("cita","p-3");
+            divCita.dataset.id = id;
+
+            // scripting 
+
+            const mascotaParrafo = document.createElement("h2");
+            mascotaParrafo.classList.add("card-title","font-weight-bolder");
+            mascotaParrafo.innerText = mascota;
+
+            const propietarioParrafo = document.createElement("p");
+            propietarioParrafo.innerHTML = `
+                <span class =" font-weight-bolder"> Propietario: </span> ${propietario}
+            `;
+
+            const telefonoParrafo = document.createElement("p");
+            telefonoParrafo.innerHTML = `
+                <span class =" font-weight-bolder"> Telefono: </span> ${telefono}
+            `;
+
+            const fechaParrafo = document.createElement("p");
+            fechaParrafo.innerHTML = `
+                <span class =" font-weight-bolder"> Fecha: </span> ${fecha}
+            `;
+
+            const horaParrafo = document.createElement("p");
+            horaParrafo.innerHTML = `
+                <span class =" font-weight-bolder"> Hora: </span> ${hora}
+            `;
+
+            const sintomasParrafo = document.createElement("p");
+            sintomasParrafo.innerHTML = `
+                <span class =" font-weight-bolder"> Sintomas: </span> ${sintomas}
+            `;
+            
+
+            // Agregar
+
+            divCita.appendChild(mascotaParrafo);
+            divCita.appendChild(propietarioParrafo);
+            divCita.appendChild(telefonoParrafo);
+            divCita.appendChild(fechaParrafo);
+            divCita.appendChild(horaParrafo);
+            divCita.appendChild(sintomasParrafo);
+
+            // Agregar al DOM
+
+            contenedorCitas.appendChild(divCita);
+
+            
+        });
+    }
+
+    limpiarHtml(){
+        if(contenedorCitas.firstChild){
+            contenedorCitas.removeChild(contenedorCitas.firstChild);
+        }
     }
 }
 
@@ -103,32 +167,51 @@ function nuevaCita(e){
     e.preventDefault();
 
     // validar
-
-    for(let i in citaObj){
-        if(citaObj[i] === ""){
-            ui.imprimirAlerta("Revisa detenidamente la informacion que has proporcionado","error");
-            return 0;
-        }
+    if(validarObjeto()){
+        ui.imprimirAlerta("Revisa detenidamente la informacion que has proporcionado","error");
     }
-    ui.imprimirAlerta("Proceso terminado satisfactoriamente","success");
 
-    // Agregar id
-    citaObj.id = Date.now();
+    else{
+        ui.imprimirAlerta("Proceso terminado satisfactoriamente","success");
 
-    // Agregar copia del objeto
-    administrarCitas.agregarCita({...citaObj});
+        // Agregar id
+        citaObj.id = Date.now();
 
-    // Reiniciar formulario
+        // Agregar copia del objeto
+        administrarCitas.agregarCita({...citaObj});
 
-    formulario.reset();
+        // imprimir citas
 
-    // Reiniciar objeto
+        ui.imprimirCitas(administrarCitas);
+        
+        // Reiniciar objeto
 
-    reiniciarObjeto();
+        reiniciarObjeto();
+
+        // Reiniciar formulario
+
+        formulario.reset();
+
+    }
 }
 
-function reiniciarObjeto(){
+
+
+function validarObjeto(){
     for(let i in citaObj){
-        citaObj[i] = "";
+        if(citaObj[i] === ""){
+            return true;
+        }
     }
+    return false;
+}
+
+
+function reiniciarObjeto(){
+    citaObj.fecha = "";
+    citaObj.hora = "";
+    citaObj.mascota = "";
+    citaObj.propietario = "";
+    citaObj.sintomas = "";
+    citaObj.telefono = "";
 }
