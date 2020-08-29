@@ -36,6 +36,11 @@ class Citas{
     constructor(){
         this.citas = [];
     }
+
+    agregarCita(cita){
+        this.citas = [...this.citas,cita];
+        console.log(this.citas);
+    }
 }
 
 class Ui{
@@ -106,5 +111,24 @@ function nuevaCita(e){
         }
     }
     ui.imprimirAlerta("Proceso terminado satisfactoriamente","success");
-    administrarCitas.citas.push(citaObj);
+
+    // Agregar id
+    citaObj.id = Date.now();
+
+    // Agregar copia del objeto
+    administrarCitas.agregarCita({...citaObj});
+
+    // Reiniciar formulario
+
+    formulario.reset();
+
+    // Reiniciar objeto
+
+    reiniciarObjeto();
+}
+
+function reiniciarObjeto(){
+    for(let i in citaObj){
+        citaObj[i] = "";
+    }
 }
