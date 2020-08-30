@@ -40,6 +40,11 @@ class Citas{
     agregarCita(cita){
         this.citas = [...this.citas,cita];
     }
+
+    eliminarCita(id){
+        this.citas = this.citas.filter(cita => cita.id != id);
+
+    }
 }
 
 class Ui{
@@ -115,7 +120,14 @@ class Ui{
                 <span class =" font-weight-bolder"> Sintomas: </span> ${sintomas}
             `;
             
+            // crear boton de eliminar
+            const btnEliminar = document.createElement("button");
+            btnEliminar.classList.add("btn","btn-danger","mr-2");
+            btnEliminar.innerHTML = `
+                Eliminar ❌
+            `;
 
+            btnEliminar.onclick = () => eliminarCita(id);
             // Agregar
 
             divCita.appendChild(mascotaParrafo);
@@ -124,6 +136,7 @@ class Ui{
             divCita.appendChild(fechaParrafo);
             divCita.appendChild(horaParrafo);
             divCita.appendChild(sintomasParrafo);
+            divCita.appendChild(btnEliminar);
 
             // Agregar al DOM
 
@@ -172,7 +185,7 @@ function nuevaCita(e){
     }
 
     else{
-        ui.imprimirAlerta("Proceso terminado satisfactoriamente","success");
+        ui.imprimirAlerta("Cita agregada satisfactoriamente","success");
 
         // Agregar id
         citaObj.id = Date.now();
@@ -214,4 +227,20 @@ function reiniciarObjeto(){
     citaObj.propietario = "";
     citaObj.sintomas = "";
     citaObj.telefono = "";
+}
+
+function eliminarCita(id){
+
+    // eliminar cita
+    administrarCitas.eliminarCita(id);
+    
+    // Mostrar mensaje 
+    ui.imprimirAlerta("Cita eliminada satisfactoriamente","success");
+
+    // limpiar html
+    ui.limpiarHtml();
+
+    // agregar citas
+    ui.imprimirCitas(administrarCitas);
+
 }
