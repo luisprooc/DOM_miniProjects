@@ -47,6 +47,11 @@ class Citas{
         this.citas = this.citas.filter(cita => cita.id != id);
 
     }
+
+    editarCita(citaActualizada){
+        this.citas = this.citas.filter(cita => cita.id != citaActualizada.id);
+        this.citas.push(citaActualizada);
+    }
 }
 
 class Ui{
@@ -199,11 +204,21 @@ function nuevaCita(e){
     else{
 
         if(editando){
+            // mostrar mensaje de finalizacion
             ui.imprimirAlerta("Cita editada satisfactoriamente","success");
 
+            //pasar copia de la cita a editar
+            administrarCitas.editarCita({...citaObj});
+
+            // cambiar boton a texto original
             formulario.querySelector("button[type= 'submit']").textContent = "CREAR CITA";
 
             editando = false;
+
+            // limpiar
+
+            ui.limpiarHtml();
+
         }
 
         else{
