@@ -1,3 +1,9 @@
+import {
+    mascotaInput,propietarioInput,telefonoInput,fechaInput,
+    horaInput,sintomasInput,formulario
+} from "./selectores.js";
+
+import {datosCitas,nuevaCita} from "./funciones.js";
 // eventos
 
 eventos();

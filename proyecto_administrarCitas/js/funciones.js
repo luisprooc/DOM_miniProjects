@@ -1,3 +1,11 @@
+import Citas from "./Citas.js";
+import Ui from "./Ui.js";
+
+import {
+    mascotaInput,propietarioInput,telefonoInput,fechaInput,
+horaInput,sintomasInput,formulario
+} from "./selectores.js";
+
 let editando;
 
 

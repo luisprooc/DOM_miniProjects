@@ -1,3 +1,5 @@
+import {eliminarCita,editarCita} from "./funciones.js";
+import {contenedorCitas} from "./selectores.js";
 class Ui{
 
     imprimirAlerta(mensaje,tipo){
