@@ -6,7 +6,7 @@ import {
 horaInput,sintomasInput,formulario
 } from "./selectores.js";
 
-let editando;
+let editando,db;
 
 
 
@@ -154,4 +154,43 @@ export function editarCita(cita){
     editando = true;
 
 
+}
+
+export function crearDB(){
+    // Crear DB en version 1.0
+
+    const DB = window.indexedDB.open("citas",1);
+    
+    // Si ocurre un error
+
+    DB.onerror = () =>{
+        alert("Ha ocurrido un error en la creacion de la DB");
+    }
+
+    // Si se crea
+    DB.onsuccess = () =>{
+        console.log("DB creada");
+        db = DB.result;
+
+    }
+
+    DB.onupgradeneeded = (e) =>{
+        const db = e.target.result;
+
+        const objectStore = db.createObjectStore("citas",
+        {
+            keyPath: "id",
+            autoIncrement: true
+        });
+
+        // Definir todas las columnas
+
+        objectStore.createIndex("mascota","mascota",{unique:false});
+        objectStore.createIndex("propietario","propietario",{unique:false});
+        objectStore.createIndex("telefono","telefono",{unique:false});
+        objectStore.createIndex("fecha","fecha",{unique:false});
+        objectStore.createIndex("hora","hora",{unique:false});
+        objectStore.createIndex("sintomas","sintomas",{unique:false});
+        objectStore.createIndex("id","id",{unique:true});
+    }
 }

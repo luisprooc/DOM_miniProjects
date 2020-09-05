@@ -3,10 +3,10 @@ import {
     horaInput,sintomasInput,formulario
 } from "./selectores.js";
 
-import {datosCitas,nuevaCita} from "./funciones.js";
+import {datosCitas,nuevaCita,crearDB} from "./funciones.js";
 // eventos
 
-eventos();
+
 
 function eventos(){
     mascotaInput.addEventListener("change",datosCitas);
@@ -21,3 +21,9 @@ function eventos(){
     formulario.addEventListener("submit",nuevaCita);
 }
 
+
+window.onload = () =>{
+    eventos();
+
+    crearDB();
+}
