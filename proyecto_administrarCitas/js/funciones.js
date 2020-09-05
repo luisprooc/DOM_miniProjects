@@ -63,13 +63,26 @@ export function nuevaCita(e){
 
         else{
 
-            ui.imprimirAlerta("Cita agregada satisfactoriamente","success");
-
             // Agregar id
             citaObj.id = Date.now();
     
             // Agregar copia del objeto
             administrarCitas.agregarCita({...citaObj});
+
+            // Agregar cita a IndexedDB
+
+            const transaction = db.transaction(["citas"],"readwrite");
+
+            // Definir el objectStore
+            const objectStore = transaction.objectStore("citas");
+
+            // Agregar cita a los campos
+            objectStore.add(citaObj);
+
+            // Mostrar cuando se completa la transaccion
+            transaction.oncomplete = () =>{
+                ui.imprimirAlerta("Cita agregada satisfactoriamente","success");
+            }
         }
 
         // imprimir citas
