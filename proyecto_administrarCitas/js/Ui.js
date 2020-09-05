@@ -1,4 +1,4 @@
-import {eliminarCita,editarCita} from "./funciones.js";
+import {eliminarCita,editarCita,db} from "./funciones.js";
 import {contenedorCitas} from "./selectores.js";
 class Ui{
 
@@ -32,11 +32,18 @@ class Ui{
         
     }
 
-    // Destructuring en el parametro
-    imprimirCitas({citas}){
+
+    imprimirCitas(){
         this.limpiarHtml();
-        citas.forEach(cita =>{
-            const {mascota,propietario,telefono,fecha,hora,sintomas,id} = cita;
+
+        const objectStore = db.transaction("citas").objectStore("citas");
+
+        // Funciona como forEach
+        objectStore.openCursor().onsuccess = (e) =>{
+            const cursor = e.target.result;
+
+            if(cursor){
+                const {mascota,propietario,telefono,fecha,hora,sintomas,id} = cursor.value;
 
             const divCita = document.createElement("div");
             divCita.classList.add("cita","p-3");
@@ -105,8 +112,11 @@ class Ui{
 
             contenedorCitas.appendChild(divCita);
 
-            
-        });
+            // Ve al siguiente elemento
+
+            cursor.continue();
+            }
+        }
     }
 
     limpiarHtml(){

@@ -7,7 +7,6 @@ import {datosCitas,nuevaCita,crearDB} from "./funciones.js";
 // eventos
 
 
-
 function eventos(){
     mascotaInput.addEventListener("change",datosCitas);
     propietarioInput.addEventListener("change",datosCitas);
@@ -26,4 +25,5 @@ window.onload = () =>{
     eventos();
 
     crearDB();
+
 }

@@ -6,7 +6,7 @@ import {
 horaInput,sintomasInput,formulario
 } from "./selectores.js";
 
-let editando,db;
+export let editando,db;
 
 
 
@@ -85,9 +85,9 @@ export function nuevaCita(e){
             }
         }
 
-        // imprimir citas
+        // imprimir citas cuando se agregue una cita
 
-        ui.imprimirCitas(administrarCitas);
+        ui.imprimirCitas();
         
         // Reiniciar objeto
 
@@ -184,6 +184,8 @@ export function crearDB(){
     DB.onsuccess = () =>{
         console.log("DB creada");
         db = DB.result;
+        // Cargar citas cuando la ventana este lista
+        ui.imprimirCitas();
 
     }
 
