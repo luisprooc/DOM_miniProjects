@@ -44,20 +44,34 @@ export function nuevaCita(e){
     else{
 
         if(editando){
-            // mostrar mensaje de finalizacion
-            ui.imprimirAlerta("Cita editada satisfactoriamente","success");
-
             //pasar copia de la cita a editar
             administrarCitas.editarCita({...citaObj});
 
-            // cambiar boton a texto original
-            formulario.querySelector("button[type= 'submit']").textContent = "CREAR CITA";
+            // Editar cita desde IndexedDB
 
-            editando = false;
+            const transaction = db.transaction(["citas"],"readwrite");
 
-            // limpiar
+            const objectStore = transaction.objectStore("citas");
 
-            ui.limpiarHtml();
+            objectStore.put(citaObj);
+
+            transaction.oncomplete = ()=>{
+                 // mostrar mensaje de finalizacion
+                ui.imprimirAlerta("Cita editada satisfactoriamente","success");
+
+                //pasar copia de la cita a editar
+                administrarCitas.editarCita({...citaObj});
+
+                // cambiar boton a texto original
+                formulario.querySelector("button[type= 'submit']").textContent = "CREAR CITA";
+
+                editando = false;
+
+                 // limpiar
+
+                ui.limpiarHtml();
+
+            }
 
         }
 

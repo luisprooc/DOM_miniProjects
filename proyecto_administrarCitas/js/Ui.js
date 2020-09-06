@@ -96,7 +96,8 @@ class Ui{
             btnEditar.innerHTML = `
                 Editar 📝
             `;
-
+            
+            const cita = cursor.value;
             btnEditar.onclick = () => editarCita(cita);
 
             divCita.appendChild(mascotaParrafo);
