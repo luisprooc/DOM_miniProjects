@@ -138,16 +138,26 @@ function reiniciarObjeto(){
 export function eliminarCita(id){
 
     // eliminar cita
-    administrarCitas.eliminarCita(id);
-    
-    // Mostrar mensaje 
-    ui.imprimirAlerta("Cita eliminada satisfactoriamente","success");
+    const transaction = db.transaction(["citas"],"readwrite");
+    const objectStore = transaction.objectStore("citas");
 
-    // limpiar html
-    ui.limpiarHtml();
+    objectStore.delete(id);
 
-    // agregar citas
-    ui.imprimirCitas(administrarCitas);
+    transaction.oncomplete = () =>{
+        // Mostrar mensaje 
+        ui.imprimirAlerta("Cita eliminada satisfactoriamente","success");
+
+        // limpiar html
+        ui.limpiarHtml();
+
+        // agregar citas
+        ui.imprimirCitas();
+    }
+
+    transaction.onerror = () =>{
+        console.log("Ha ocurrido un error");
+    }
+
 
 }
 
