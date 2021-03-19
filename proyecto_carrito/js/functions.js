@@ -1,41 +1,10 @@
-// Variables
-
-const carrito = document.getElementById("carrito");
-
-const cursos = document.getElementById("lista-cursos");
-
-const listaCursos = document.querySelector("#lista-carrito tbody");
-
-const vaciarCarritoBtn = document.getElementById("vaciar-carrito");
-
-// Listeners
-
-cargarListeners();
-
-function cargarListeners(){
-    // Se ejecuta cuando se presiona "Agregar Carrito"
-    cursos.addEventListener("click",comprarCurso);
-
-    // Cuando se elimina un curso del carrito
-
-    carrito.addEventListener("click",eliminarCurso);
-
-    // Cuando se presiona vaciar carrito
-
-    vaciarCarritoBtn.addEventListener("click",vaciarCarrito);
-
-    // Al cargar documento cargar local storage
-
-    document.addEventListener("DOMContentLoaded",leerLocalStorage);
-}
-
-
+import { listaCursos } from "./index.js";
 
 // Funciones
 
 // Agrega el curso al carrito
 
-function comprarCurso(e){
+export function comprarCurso(e){
     e.preventDefault();
 
     if(e.target.classList.contains("agregar-carrito")){
@@ -77,7 +46,7 @@ function insertarCarrito(infoCurso){
 }
 
 // Eliminar curso del carrito en el Dom
-function eliminarCurso(e){
+export function eliminarCurso(e){
     e.preventDefault();
     let curso,cursoId; 
     if(e.target.classList.contains("borrar-curso")){
@@ -91,7 +60,7 @@ function eliminarCurso(e){
 
 // Eliminar todos los cursos del carrito en el Dom
 
-function vaciarCarrito(){
+export function vaciarCarrito(){
     // forma lenta
     //listaCursos.innerHTML = "";
 
@@ -142,7 +111,7 @@ function guardarCursoLocalStorage(curso){
 
 // Imprime los cursos del local storage en el carrito
 
-function leerLocalStorage(){
+export function leerLocalStorage(){
     let cursosLS;
     cursosLS = obtenerCursosLocalStorage();
 

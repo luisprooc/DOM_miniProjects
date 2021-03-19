@@ -1,7 +1,5 @@
 # Javascript DOM Projects 
 
-*Note: By the way the HTML and CSS will be predefined*
-======================================================
 
 ## Tweets from a textarea
 
@@ -17,7 +15,6 @@ _This is a small project using local storage in which:_
 
 
 
-=====================================================
 
 ## Shopping cart
 
@@ -31,7 +28,6 @@ _This is a small project using local storage in which:_
 
 
 
-=====================================================
 
 ## Email sending simulator
 
@@ -47,7 +43,6 @@ _This is a small project using local storage in which:_
 
 
 
-=====================================================
 
 ## Quote your car insurance
 
@@ -61,7 +56,6 @@ _This is a small project using local storage in which:_
 
 
 
-=====================================================
 
 ## Weekly expense
 
@@ -75,7 +69,6 @@ _This is a small project using local storage in which:_
 
 
 
-=====================================================
 
 ## Car seeker
 
@@ -89,7 +82,6 @@ _This is a small project using local storage in which:_
 
 
 
-=====================================================
 
 ## Cites administrator
 

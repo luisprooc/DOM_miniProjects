@@ -1,93 +1,9 @@
-// variables
-
-const resultado = document.getElementById("resultado");
-
-const marca = document.getElementById("marca");
-const year = document.getElementById("year");
-const minimo = document.getElementById("minimo");
-const maximo = document.getElementById("maximo");
-const puertas = document.getElementById("puertas");
-const transmision = document.getElementById("transmision");
-const color = document.getElementById("color");
-
-// obtener años
-const max = new Date().getFullYear(); 
-const min = max - 5;
-
-// Generar datos de busqueda
-
-const datosBusqueda = {
-    marca: "",
-    año: "",
-    min: "",
-    max: "",
-    puertas: "",
-    transmision: "",
-    color: ""
-}
-
-
-// eventos
-
-document.addEventListener("DOMContentLoaded", ()=>{
-    // muestra los autos al cargar
-    mostrarAutos(autos);
-
-    // llenar años del select
-
-    llenarYears();
-});
-
-// obtener valores de los select
-marca.addEventListener("change", (e) => {
-    datosBusqueda.marca = e.target.value;
-    
-    filtrarAuto();
-});
-
-year.addEventListener("change", (e) => {
-    datosBusqueda.año = e.target.value;
-    
-    filtrarAuto();
-});
-
-minimo.addEventListener("change", (e) => {
-    datosBusqueda.min = e.target.value;
-
-    filtrarAuto();
-    
-});
-
-maximo.addEventListener("change", (e) => {
-    datosBusqueda.max = e.target.value;
-
-    filtrarAuto();
-    
-});
-
-puertas.addEventListener("change", (e) => {
-    datosBusqueda.puertas = e.target.value;
-    
-    filtrarAuto();
-});
-
-transmision.addEventListener("change", (e) => {
-    datosBusqueda.transmision = e.target.value;
-
-    filtrarAuto();
-    
-});
-
-color.addEventListener("change", (e) => {
-    datosBusqueda.color = e.target.value;
-
-    filtrarAuto();
-});
-
+import { max, min, resultado,year, datosBusqueda } from "./index.js";
+import autos from "./db.js";
 
 // funciones
 
-function mostrarAutos(autos){
+export function mostrarAutos(autos){
     limpiarHtml();
     if(autos.length > 0){
         autos.forEach(auto => {
@@ -123,7 +39,7 @@ function limpiarHtml(){
 
 
 
-function llenarYears(){
+export function llenarYears(){
 
     // Recorrer de adelante hacia atras los años
     for(let i = max; i >= min;--i ){
@@ -141,7 +57,7 @@ function llenarYears(){
 
 // Filtrar en base a la marca
 
-function filtrarAuto(){
+export function filtrarAuto(){
     // funcion de alto nivel
     const autosFiltrados = autos.filter( filtrarMarca ).filter(filtrarYear).filter(filtrarMinimo).filter(filtrarMaximo)
     .filter(filtrarPuertas).filter(filtrarTransmision).filter(filtrarColor);
@@ -161,8 +77,8 @@ function filtrarMarca(auto){
 }
 
 function filtrarYear(auto){
-    if(datosBusqueda.año){
-        return auto.year === parseInt(datosBusqueda.año);
+    if(datosBusqueda.year){
+        return auto.year === parseInt(datosBusqueda.year);
     }
 
     return auto;

@@ -1,36 +1,7 @@
-// Variables
-
-const presupuestoUsuario = parseInt(prompt("Introduce tu presupuesto semanal: "));
-const formulario = document.getElementById("agregar-gasto");
-let cantidadPresupuesto;
-
-
-
-
-
-
-
-
-// Clases
-
-
-class Presupuesto{
-
-    constructor(presupuesto) {
-        this.presupuesto = presupuesto;
-        this.restante = presupuesto;
-    }
-
-    presupuestoRestante(cantidad = 0){
-        if(this.restante <= cantidad){
-            alert("Ya gastaste el presupuesto de la semana , Todo lo agregado a continuacion se descontara de la proxima semana");
-            
-        }
-        return this.restante -= cantidad;
-    }
-}
+import { cantidadPresupuesto,formulario } from "./index.js";
 
 // Maneja todo lo relacionado con HTML
+
 class Interfaz{
     insertarPresupuesto(cantidad){
         const presupuestoSpan = document.querySelector("span#total");
@@ -103,8 +74,6 @@ class Interfaz{
         const presupuestoTotal = cantidadPresupuesto.presupuesto;
         const presupuestoRestante = cantidadPresupuesto.restante;
 
-        
-
         // obtener 25%
 
         if( (presupuestoTotal / 4) > presupuestoRestante){
@@ -122,67 +91,4 @@ class Interfaz{
     }
 }
 
-
-
-
-
-
-
-
-
-// Listeners
-
-document.addEventListener("DOMContentLoaded",function(){
-
-    if(isNaN(presupuestoUsuario)){
-        // Si no se introduce un numero se recarga la ventana
-        alert("Debes introducir un numero");
-        window.location.reload();
-    }
-
-    else{
-        // Instanciar presupuesto
-
-        cantidadPresupuesto = new Presupuesto(presupuestoUsuario);
-        
-        const ui = new Interfaz();
-
-        ui.insertarPresupuesto(cantidadPresupuesto.presupuesto);
-    }
-});
-
-
-
-formulario.addEventListener("submit",function(e){
-    e.preventDefault();
-
-    // obtener valores del campo
-    const nombreGasto = document.querySelector("#gasto").value;
-    const cantidadGasto = parseInt(document.querySelector("#cantidad").value);
-
-    // instanciar interfaz
-
-    ui = new Interfaz();
-
-    if(nombreGasto === "" || cantidadGasto === "" || isNaN(cantidadGasto)){
-
-        ui.imprimirMensaje("Ocurrio un error, llena los campos correctamente","error");
-    }
-
-    else{
-        ui.imprimirMensaje("Correcto","correto");
-        ui.agregarGastoListado(nombreGasto,cantidadGasto);
-        ui.presupuestoRestante(cantidadGasto);
-        
-    }
-});
-
-
-
-
-
-
-
-
-
-
+export default Interfaz;

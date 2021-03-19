@@ -191,3 +191,5 @@ const autos = [
         transmision: 'automatico' 
     }
 ];
+
+export default autos;

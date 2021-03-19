@@ -1,50 +1,15 @@
-// variables
-
-const email = document.getElementById("email");
-const asunto = document.getElementById("asunto");
-const mensaje = document.getElementById("mensaje");
-const btnEnviar = document.getElementById("enviar");
-const formulario = document.getElementById("enviar-mail");
-const resetBtn = document.getElementById("resetBtn")
-
-
-// Listeners
-
-eventos();
-
-function eventos(){
-
-    // Cuando cargue la pagina
-    document.addEventListener("DOMContentLoaded",inicioApp);
-
-    // Campos del formulario
-
-    email.addEventListener("blur",validarCampo);
-    asunto.addEventListener("blur",validarCampo);
-    mensaje.addEventListener("blur",validarCampo);
-
-    // boton enviar
-
-    btnEnviar.addEventListener("click",enviarEmail);
-
-    // Boton reset
-
-    resetBtn.addEventListener("click",resetFormulario);
-}
-
-
-
+import { email,asunto,mensaje,btnEnviar, formulario } from "./index.js";
 
 // Funciones
 
-function inicioApp(){
+export function inicioApp(){
     btnEnviar.disabled = true;
 }
 
 
 // Verificar si en el campo hay algo
 
-function validarCampo(){
+export function validarCampo(){
     
     // Se validad la longitud del texto
 
@@ -65,7 +30,7 @@ function validarCampo(){
     }
 }
 
-function validarLongitud(campo){
+export function validarLongitud(campo){
     if(campo.value.length > 0){
         campo.style.borderBottomColor = "green";
         campo.classList.remove("error");
@@ -92,7 +57,7 @@ function validarEmail(campo){
 
 // function enviar email
 
-function enviarEmail(e){
+export function enviarEmail(e){
     // Spinner al presionar enviar
     let spinnerGif = document.querySelector("#spinner");
     spinnerGif.style.display = "block";
@@ -121,7 +86,7 @@ function enviarEmail(e){
     
 }
 
-function resetFormulario(e){
+export function resetFormulario(e){
     formulario.reset();
     e.preventDefault();
 

@@ -1,32 +1,10 @@
 
-// Variables
-
-const listaTweets = document.getElementById("lista-tweets");
-
-
-// Events Listeners
-
-eventos();
-
-function eventos(){
-    document.querySelector("#formulario").addEventListener("submit",agregarTweet);
-
-    // Borrar Tweets
-
-    listaTweets.addEventListener("click",borrarTweet);
-
-    // Contenido cargado
-
-    document.addEventListener("DOMContentLoaded",localStorageListo);
-}
-
-
-
+import { listaTweets } from "./index.js";
 // Funciones
 
 // añadir tweet del formulario
 
-function agregarTweet(e){
+export function agregarTweet(e){
     e.preventDefault();
 
     // Tener valor del textarea
@@ -52,7 +30,7 @@ function agregarTweet(e){
 }
 
 // Eliminar el tweet
-function borrarTweet(e){
+export function borrarTweet(e){
     e.preventDefault();
 
     // usar traversing para eliminar el elemento
@@ -66,7 +44,7 @@ function borrarTweet(e){
 
 // Agregar tweet a Local Storage
 
-function agregarTweetLocalStorage(tweet){
+export function agregarTweetLocalStorage(tweet){
     let tweets;
     tweets = obtenerTweetsLocalStorage();
 
@@ -81,7 +59,7 @@ function agregarTweetLocalStorage(tweet){
 
 // Revisar si hay tweets en local storage
 
-function obtenerTweetsLocalStorage(){
+export function obtenerTweetsLocalStorage(){
     let tweets;
     // Revisar valores del local Storage
     if(localStorage.getItem("tweets") === null){
@@ -96,7 +74,7 @@ function obtenerTweetsLocalStorage(){
 
 // Mostrar datos del local storage
 
-function localStorageListo(){
+export function localStorageListo(){
     let tweets;
 
     tweets = obtenerTweetsLocalStorage();
@@ -121,7 +99,7 @@ function localStorageListo(){
 
 // eliminar tweet en local storage
 
-function borrarTweetLocalStorage(tweet){
+export function borrarTweetLocalStorage(tweet){
     let tweets, tweetBorrar;
     tweetBorrar = tweet.substring(0,tweet.length -1);
     tweets = obtenerTweetsLocalStorage();
